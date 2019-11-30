@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
@@ -50,6 +52,9 @@ namespace ClientSide
                     {
                         label.Text = "Authentificated Successfuly";
                         zero = client;
+                        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
+                        Socket server = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp);
+                        server.Connect(ipep);
                         break;
                     }
                     else
