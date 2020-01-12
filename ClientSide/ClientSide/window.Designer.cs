@@ -32,6 +32,7 @@
             this.send = new System.Windows.Forms.Button();
             this.conversation = new System.Windows.Forms.RichTextBox();
             this.nomclient = new System.Windows.Forms.Label();
+            this.ChannelList = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // messagesent
@@ -67,11 +68,21 @@
             this.nomclient.Size = new System.Drawing.Size(0, 13);
             this.nomclient.TabIndex = 3;
             // 
+            // ChannelList
+            // 
+            this.ChannelList.FormattingEnabled = true;
+            this.ChannelList.Location = new System.Drawing.Point(620, 70);
+            this.ChannelList.Name = "ChannelList";
+            this.ChannelList.Size = new System.Drawing.Size(103, 173);
+            this.ChannelList.TabIndex = 4;
+            this.ChannelList.SelectedIndexChanged += new System.EventHandler(this.ChannelList_SelectedIndexChanged);
+            // 
             // window
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ChannelList);
             this.Controls.Add(this.nomclient);
             this.Controls.Add(this.conversation);
             this.Controls.Add(this.send);
@@ -89,5 +100,6 @@
         private System.Windows.Forms.Button send;
         private System.Windows.Forms.RichTextBox conversation;
         private System.Windows.Forms.Label nomclient;
+        private System.Windows.Forms.ListBox ChannelList;
     }
 }

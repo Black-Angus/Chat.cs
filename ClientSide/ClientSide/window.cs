@@ -19,23 +19,36 @@ namespace ClientSide
     {
         TcpClient tcp;
         Client connected;
+        Channels listechannels;
+        string currentchannel;
         public window()
         {
             InitializeComponent();
+            
         }
 
+        
         public window(Client client)
         {
             InitializeComponent();
             this.connected = client;
             nomclient.Text = connected.name;
             TcpClient tcpclient = new TcpClient();
-
-            try
+            listechannels = new Channels();
+            listechannels._channels.Add(new Channel("General"));
+            listechannels._channels.Add(new Channel("Cafe des Sports"));
+            listechannels._channels.Add(new Channel("Lounge"));
+            foreach (Channel c in listechannels._channels)
+            {
+                ChannelList.Items.Add(c._name);
+            }
+                try
             {
                 tcpclient.Connect(IPAddress.Parse("127.0.0.1"), 5000);
                 this.tcp = tcpclient;
-                sendmessage("Salut");
+                sendmessage(connected.name);
+                connectchannels();
+                sendmessage("User has joined conversation");
                 Thread thread = new Thread(o => wait((TcpClient)o));
 
                 //I start my thread
@@ -44,21 +57,23 @@ namespace ClientSide
 
             catch(SocketException)
             {
-                nomclient.Text = "Connexion impossible au serveur";
+                nomclient.Text = "Unable to establish connection with server";
             }
         }
         private void send_Click(object sender, EventArgs e)
         {
+            sendmessage("msg");
+            sendmessage(ChannelList.SelectedItem.ToString());
             sendmessage(messagesent.Text);
+
         }
 
         public void sendmessage(string msg)
         {
             byte[] message = Encoding.ASCII.GetBytes(msg);
-            /*StreamWriter sw = new StreamWriter(tcp.GetStream());
-            sw.Write(msg);*/
             NetworkStream ns = tcp.GetStream();
             ns.Write(message, 0, message.Length);
+            System.Threading.Thread.Sleep(60);
         }
 
          void wait(TcpClient client)
@@ -66,10 +81,19 @@ namespace ClientSide
             NetworkStream ns = tcp.GetStream();
             byte[] datarecieved = new byte[1024];
             int byte_count;
+          
             while ((byte_count = ns.Read(datarecieved, 0, datarecieved.Length)) > 0)
             {
                 string data = Encoding.ASCII.GetString(datarecieved, 0, byte_count);
-                AppendText(data, false);
+
+                
+                if(data == currentchannel) {
+                    string msg = receive(client);
+                    AppendText(msg, false);
+
+                }
+
+
             }
         }
 
@@ -90,5 +114,52 @@ namespace ClientSide
             }
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChannelList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            currentchannel = ChannelList.SelectedItem.ToString();
+            conversation.Clear();
+        }
+
+        public static string receive(TcpClient tcp)
+        {
+            NetworkStream ns = tcp.GetStream();
+            byte[] datarecieved = new byte[1024];
+            int byte_count = ns.Read(datarecieved, 0, datarecieved.Length);
+            string data = Encoding.ASCII.GetString(datarecieved, 0, byte_count);
+            return data;
+        }
+
+
+        private void clickconnet_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                sendmessage("connectchannel");
+                string item = ChannelList.GetItemText(ChannelList.SelectedItem);
+                sendmessage(item);
+                sendmessage(connected.name);
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void connectchannels()
+        {
+            foreach(Channel c in listechannels._channels)
+            {
+                sendmessage("connectchannel");
+                string item = c._name;
+                sendmessage(item);
+                sendmessage(connected.name);
+            }
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace ServerSide
 
     public partial class Form1 : Form
     {
-        static public List<TcpClient> tcplist = new List<TcpClient>();
+        static public List<Client> listeclients = new List<Client>();
 
         public Form1()
         {
@@ -38,7 +38,8 @@ namespace ServerSide
                 {
                     Console.WriteLine("Waiting for incoming client connections...");
                     TcpClient client = listener.AcceptTcpClient();
-                    tcplist.Add(client);
+                    string name = receive(client);
+                    listeclients.Add(new Client(name, client));
                     Console.WriteLine("Accepted new client connection...");
                     Thread t = new Thread(ProcessClientRequests);
                     t.Start(client);
@@ -67,10 +68,41 @@ namespace ServerSide
                 {
                     byte[] msg = new byte[1024];
 
-                    int action_count = stream.Read(msg, 0, msg.Length);
-                    string action = Encoding.ASCII.GetString(msg, 0, action_count);
-                    Console.WriteLine(action);
-                    broadcast(action);
+                    int cmd_count = stream.Read(msg, 0, msg.Length);
+                    string cmd = Encoding.ASCII.GetString(msg, 0, cmd_count);
+                    Console.WriteLine(cmd);
+                    string channelwanted;
+                    switch (cmd)
+                    {
+                        
+                        case "connectchannel":  
+                             channelwanted = receive(client);
+                            string clientname = receive(client);
+                            foreach(Client c in listeclients)
+                            {
+                                if(c.name == clientname)
+                                {
+                                    c.meschannels.Add(new Channel(channelwanted));
+                                }
+                            }
+                            break;
+
+                        case "msg":
+                            channelwanted = receive(client);
+                            Console.WriteLine(channelwanted);
+                            string content = receive(client);
+                            sendchannel(content, new Channel(channelwanted));
+
+                            break;
+
+                        default:
+                            Console.WriteLine("Action non trouvée pour : " + cmd);
+                            break;
+                    }
+
+
+
+
                 }
             }
 
@@ -79,9 +111,27 @@ namespace ServerSide
 
         public static void broadcast(string message)
         {
-            foreach(TcpClient c in tcplist)
+            foreach(Client c in listeclients)
             {
-                sendmessage(message, c);
+                sendmessage(message, c._tcpclient);
+            }
+        }
+
+        public static void sendchannel(string message, Channel ch)
+        {
+            foreach(Client cl in listeclients)
+            {
+                Console.WriteLine(cl.name);
+                foreach(Channel c in cl.meschannels)
+                {
+                    Console.WriteLine(c._name + " "+ ch._name);
+                    if(ch._name == c._name)
+                    {
+                        Console.WriteLine("sent to " + cl.name);
+                        sendmessage(ch._name, cl._tcpclient);
+                        sendmessage(message, cl._tcpclient);
+                    }
+                }
             }
         }
 
@@ -92,10 +142,19 @@ namespace ServerSide
             sw.Write(msg);*/
             NetworkStream ns = tcp.GetStream();
             ns.Write(message, 0, message.Length);
+            System.Threading.Thread.Sleep(60);
+
         }
 
 
-
+        public static string receive(TcpClient tcp)
+        {
+            NetworkStream ns = tcp.GetStream();
+            byte[] datarecieved = new byte[1024];
+            int byte_count = ns.Read(datarecieved, 0, datarecieved.Length);
+            string data = Encoding.ASCII.GetString(datarecieved, 0, byte_count);
+            return data;
+        }
 
 
 

@@ -11,10 +11,12 @@ namespace ClientSide
     {
         public string name;
         public string password;
+        //public Channels mychannels;
         
 
         public Client(string name, string password)
         {
+            //this.mychannels = mychannels;
             this.name = name;
             this.password = password;
         }
