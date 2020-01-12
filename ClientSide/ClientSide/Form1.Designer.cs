@@ -40,16 +40,17 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(93, 153);
+            this.label4.Location = new System.Drawing.Point(12, 37);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 1;
             this.label4.Text = "Username";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(334, 153);
+            this.label5.Location = new System.Drawing.Point(179, 37);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 2;
@@ -57,14 +58,14 @@
             // 
             // namebox
             // 
-            this.namebox.Location = new System.Drawing.Point(96, 169);
+            this.namebox.Location = new System.Drawing.Point(73, 34);
             this.namebox.Name = "namebox";
             this.namebox.Size = new System.Drawing.Size(100, 20);
             this.namebox.TabIndex = 3;
             // 
             // psbox
             // 
-            this.psbox.Location = new System.Drawing.Point(337, 169);
+            this.psbox.Location = new System.Drawing.Point(238, 34);
             this.psbox.Name = "psbox";
             this.psbox.Size = new System.Drawing.Size(100, 20);
             this.psbox.TabIndex = 4;
@@ -72,7 +73,7 @@
             // 
             // loginbut
             // 
-            this.loginbut.Location = new System.Drawing.Point(239, 223);
+            this.loginbut.Location = new System.Drawing.Point(344, 32);
             this.loginbut.Name = "loginbut";
             this.loginbut.Size = new System.Drawing.Size(75, 23);
             this.loginbut.TabIndex = 5;
@@ -83,7 +84,7 @@
             // Info
             // 
             this.Info.AutoSize = true;
-            this.Info.Location = new System.Drawing.Point(266, 277);
+            this.Info.Location = new System.Drawing.Point(341, 77);
             this.Info.Name = "Info";
             this.Info.Size = new System.Drawing.Size(25, 13);
             this.Info.TabIndex = 6;
@@ -92,7 +93,7 @@
             // 
             // Register
             // 
-            this.Register.Location = new System.Drawing.Point(239, 251);
+            this.Register.Location = new System.Drawing.Point(425, 32);
             this.Register.Name = "Register";
             this.Register.Size = new System.Drawing.Size(75, 23);
             this.Register.TabIndex = 7;
@@ -102,7 +103,7 @@
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(711, 585);
+            this.ClientSize = new System.Drawing.Size(513, 155);
             this.Controls.Add(this.Register);
             this.Controls.Add(this.Info);
             this.Controls.Add(this.loginbut);

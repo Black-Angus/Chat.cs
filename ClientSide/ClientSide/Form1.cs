@@ -28,8 +28,12 @@ namespace ClientSide
             ClientList liste = new ClientList();
             liste = liste.Deserialize();
 
-            liste.Check(username, password, Info);
-
+            Client newclient = liste.Check(username, password, Info);
+            if( newclient != null)
+            {
+                window fenetre = new window(newclient);
+                fenetre.Show();
+            }
 
         }
 
@@ -66,6 +70,11 @@ namespace ClientSide
         {
             Form register = new Signup();
             register.Show();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

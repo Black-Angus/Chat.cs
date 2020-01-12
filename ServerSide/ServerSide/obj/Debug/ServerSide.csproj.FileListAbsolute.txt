@@ -1,0 +1,12 @@
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\bin\Debug\ServerSide.exe.config
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\bin\Debug\ServerSide.exe
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\bin\Debug\ServerSide.pdb
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\bin\Debug\SimpleTCP.dll
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\obj\Debug\ServerSide.csprojAssemblyReference.cache
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\obj\Debug\ServerSide.Form1.resources
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\obj\Debug\ServerSide.Properties.Resources.resources
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.GenerateResource.cache
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CoreCompileInputs.cache
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\obj\Debug\ServerSide.csproj.CopyComplete
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\obj\Debug\ServerSide.exe
+C:\Users\33695\Documents\Cours\S7\C#\Projet\Chat.cs\Chat.cs\ServerSide\ServerSide\obj\Debug\ServerSide.pdb

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ServerSide
 {
-    static class Program
+     class Program
     {
+        static public List<TcpClient> tcplist = new List<TcpClient>();
         /// <summary>
         /// Point d'entrée principal de l'application.
         /// </summary>
@@ -19,14 +21,43 @@ namespace ServerSide
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+            initialize();
+        }
+            static void initialize()
+            {
+                TcpListener listener = null;
+                try
+                {
+                    listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 5000);
+                    listener.Start();
+                    Console.WriteLine("MultiThreadedEchoServer started...");
+                    while (true)
+                    {
+                        Console.WriteLine("Waiting for incoming client connections...");
+                        TcpClient client = listener.AcceptTcpClient();
+                        tcplist.Add(client);
+                        Console.WriteLine("Accepted new client connection...");
+                        Thread t = new Thread(ProcessClientRequests);
+                        t.Start(client);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                finally
+                {
+                    if (listener != null)
+                    {
+                        listener.Stop();
+                    }
+                }
 
-
-
-            IPEndPoint localEndPoint = new IPEndPoint(IPAddress.Any, 8000);
-            Socket newsock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            newsock.Bind(localEndPoint);
-            newsock.Listen(10);
-            Socket client = newsock.Accept();
+                void ProcessClientRequests()
+                {
+                    
+                }
+            }
         }
     }
-}
+

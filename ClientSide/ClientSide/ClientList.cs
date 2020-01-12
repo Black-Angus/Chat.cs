@@ -23,6 +23,10 @@ namespace ClientSide
             //listeclients.Add(new Client("admin", "admin"));
         }
 
+
+
+        //------------Serialization and Deserialazation------------//
+
         public void Serialize(ClientList list)
         {
             IFormatter formatter = new BinaryFormatter();
@@ -41,6 +45,13 @@ namespace ClientSide
             return list;
         }
 
+
+
+        //------------Login and Password Check------------//
+
+
+
+
         public Client Check(string username, string password, Label label)
         {
             Client zero = null;
@@ -52,9 +63,6 @@ namespace ClientSide
                     {
                         label.Text = "Authentificated Successfuly";
                         zero = client;
-                        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000);
-                        Socket server = new Socket(AddressFamily.InterNetwork,SocketType.Stream, ProtocolType.Tcp);
-                        server.Connect(ipep);
                         break;
                     }
                     else
