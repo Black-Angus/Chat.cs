@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ServerSide
 {
-    public class Client
+    public class Client     // le client possède un nom, un mot de passe, et une liste de channels qu'il utilise
     {
         public string name;
         public TcpClient _tcpclient;

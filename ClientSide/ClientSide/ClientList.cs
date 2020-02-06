@@ -50,7 +50,7 @@ namespace ClientSide
         //------------Login and Password Check------------//
 
 
-
+            //renvoie un client si le client existe en base de données, null sinon
 
         public Client Check(string username, string password, Label label)
         {

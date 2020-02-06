@@ -18,7 +18,7 @@ namespace ServerSide
 
     public partial class Form1 : Form
     {
-        static public List<Client> listeclients = new List<Client>();
+        static public List<Client> listeclients = new List<Client>();       // Création de la liste de clients
 
         public Form1()
         {
@@ -32,17 +32,17 @@ namespace ServerSide
             try
             {
                 listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 5000);
-                listener.Start();
+                listener.Start();                                                   //Création du listener, reste en attente de connexions
                 Console.WriteLine("MultiThreadedEchoServer started...");
                 while (true)
                 {
                     Console.WriteLine("Waiting for incoming client connections...");
                     TcpClient client = listener.AcceptTcpClient();
-                    string name = receive(client);
-                    listeclients.Add(new Client(name, client));
+                    string name = receive(client);                                  //réception du nom du client qui vient de se connecter
+                    listeclients.Add(new Client(name, client));                     //ajout à la liste de clients
                     Console.WriteLine("Accepted new client connection...");
-                    Thread t = new Thread(ProcessClientRequests);
-                    t.Start(client);
+                    Thread t = new Thread(ProcessClientRequests);                   //création du thread pour le nouveau client
+                    t.Start(client);                                                //démarrage du thread, avec le nouveau client en paramètre
                 }
             }
             catch (Exception e)
@@ -72,26 +72,26 @@ namespace ServerSide
                     string cmd = Encoding.ASCII.GetString(msg, 0, cmd_count);
                     Console.WriteLine(cmd);
                     string channelwanted;
-                    switch (cmd)
+                    switch (cmd)                //lorsque le client réalise une action, il envoie d'abord un message 'commande' qui permet au serveur d'identifier l'action exigée
                     {
                         
-                        case "connectchannel":  
-                             channelwanted = receive(client);
-                            string clientname = receive(client);
-                            foreach(Client c in listeclients)
+                        case "connectchannel":      //lorsque le client souhaite se connecter à un channel
+                             channelwanted = receive(client);       //réception du nom du channel désiré
+                            string clientname = receive(client);    //réception de son nom
+                            foreach (Client c in listeclients)
                             {
                                 if(c.name == clientname)
                                 {
-                                    c.meschannels.Add(new Channel(channelwanted));
+                                    c.meschannels.Add(new Channel(channelwanted));      //parcourt la liste des clients, ajout du channel désiré à la liste de channels utilisés par le client
                                 }
                             }
                             break;
 
                         case "msg":
-                            channelwanted = receive(client);
+                            channelwanted = receive(client);    //channel concerné
                             Console.WriteLine(channelwanted);
-                            string content = receive(client);
-                            sendchannel(content, new Channel(channelwanted));
+                            string content = receive(client);   //message
+                            sendchannel(content, new Channel(channelwanted));   //envoi
 
                             break;
 
@@ -109,7 +109,7 @@ namespace ServerSide
 
         }
 
-        public static void broadcast(string message)
+        public static void broadcast(string message)            //envoi de la donnée à chaque client connecté
         {
             foreach(Client c in listeclients)
             {
@@ -125,7 +125,7 @@ namespace ServerSide
                 foreach(Channel c in cl.meschannels)
                 {
                     Console.WriteLine(c._name + " "+ ch._name);
-                    if(ch._name == c._name)
+                    if(ch._name == c._name)                     //parcourt tous les channels, lorsque le channel concerné est trouvé, envoi du message à celui-ci
                     {
                         Console.WriteLine("sent to " + cl.name);
                         sendmessage(ch._name, cl._tcpclient);
@@ -135,7 +135,7 @@ namespace ServerSide
             }
         }
 
-        public static void sendmessage(string msg, TcpClient tcp)
+        public static void sendmessage(string msg, TcpClient tcp)       //envoie un message ou une commande, prend en paramètres le texte et un tcpclient 
         {
             byte[] message = Encoding.ASCII.GetBytes(msg);
             /*StreamWriter sw = new StreamWriter(tcp.GetStream());
@@ -147,7 +147,7 @@ namespace ServerSide
         }
 
 
-        public static string receive(TcpClient tcp)
+        public static string receive(TcpClient tcp)     //reçoit un message ou une commande, prend en paramètre un tcpclient
         {
             NetworkStream ns = tcp.GetStream();
             byte[] datarecieved = new byte[1024];
@@ -160,7 +160,7 @@ namespace ServerSide
 
 
 
-
+        //--------------Tout ce qui est en dessous n'est pas utilisé, il s'agit d'ancien code que j'ai abandonné--------------
 
 
         private void textBox1_TextChanged(object sender, EventArgs e)

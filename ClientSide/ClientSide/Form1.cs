@@ -29,7 +29,7 @@ namespace ClientSide
             liste = liste.Deserialize();
 
             Client newclient = liste.Check(username, password, Info);
-            if( newclient != null)
+            if( newclient != null)      //ouvre une fenêtre client si celui ci existe
             {
                 window fenetre = new window(newclient);
                 fenetre.Show();

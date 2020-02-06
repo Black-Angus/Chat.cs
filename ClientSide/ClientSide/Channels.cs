@@ -19,6 +19,9 @@ namespace ClientSide
             _channels = new List<Channel>();
         }
 
+
+        //------------Serialization and Deserialazation------------//
+
         public void Serialize(Channels channels)
         {
             IFormatter formatter = new BinaryFormatter();

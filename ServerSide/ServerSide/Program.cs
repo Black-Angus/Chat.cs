@@ -21,7 +21,7 @@ namespace ServerSide
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            //initialize();
+            //   initialize();
         }
             /*static void initialize()
             {
