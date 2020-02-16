@@ -64,7 +64,7 @@ namespace ClientSide
         {
             sendmessage("msg");                                 //lors de l'envoi d'un message, le client envoie la commande msg, le nom du channel puis le contenu
             sendmessage(ChannelList.SelectedItem.ToString());
-            sendmessage(messagesent.Text);
+            sendmessage(connected.name + ": " + messagesent.Text);
 
         }
 
