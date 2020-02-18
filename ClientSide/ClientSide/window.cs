@@ -180,5 +180,10 @@ namespace ClientSide
                 sendmessage(connected.name);
             }
         }
+
+        private void messagesent_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
