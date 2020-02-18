@@ -35,9 +35,9 @@ namespace ClientSide
             nomclient.Text = connected.name;
             TcpClient tcpclient = new TcpClient();
             listechannels = new Channels();
-            listechannels._channels.Add(new Channel("General"));
-            listechannels._channels.Add(new Channel("Cafe des Sports"));
-            listechannels._channels.Add(new Channel("Lounge"));             //ajout de 3 channels, disponibles pour tous les clients
+            listechannels._channels.Add(new Channel("[NITRO]GANG"));
+            listechannels._channels.Add(new Channel("ITF 2021"));
+            listechannels._channels.Add(new Channel("F RAIE CHAR O"));             //ajout de 3 channels, disponibles pour tous les clients
             foreach (Channel c in listechannels._channels)
             {
                 ChannelList.Items.Add(c._name);     //affichage des channels dans une listbox
@@ -62,9 +62,18 @@ namespace ClientSide
         }
         private void send_Click(object sender, EventArgs e)
         {
-            sendmessage("msg");                                 //lors de l'envoi d'un message, le client envoie la commande msg, le nom du channel puis le contenu
-            sendmessage(ChannelList.SelectedItem.ToString());
-            sendmessage(connected.name + ": " + messagesent.Text);
+
+            try
+            {
+                sendmessage("msg");                                 //lors de l'envoi d'un message, le client envoie la commande msg, le nom du channel puis le contenu
+                sendmessage(ChannelList.SelectedItem.ToString());
+                sendmessage(connected.name + ": " + messagesent.Text);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
 
         }
 
@@ -123,6 +132,16 @@ namespace ClientSide
         {
             currentchannel = ChannelList.SelectedItem.ToString();
             conversation.Clear();   // efface le texte lors d'un changement de channel
+
+            foreach (Channel cc in listechannels._channels) // demande la récupération de l'historique de la conversation
+            {
+                if(currentchannel == cc._name)
+                {
+                    sendmessage("get_text");
+                    System.Threading.Thread.Sleep(60);
+                    sendmessage(currentchannel);
+                }
+            }
         }
 
         public static string receive(TcpClient tcp) //réception de données, prend en paramètre un tcpclient

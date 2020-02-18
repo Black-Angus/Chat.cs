@@ -19,7 +19,8 @@ namespace ServerSide
     public partial class Form1 : Form
     {
         static public List<Client> listeclients = new List<Client>();       // Création de la liste de clients
-
+        static public List<Channel> abschannellist = new List<Channel>();   // Création de la liste des channels
+        
         public Form1()
         {
             InitializeComponent();
@@ -34,6 +35,10 @@ namespace ServerSide
                 listener = new TcpListener(IPAddress.Parse("127.0.0.1"), 5000);
                 listener.Start();                                                   //Création du listener, reste en attente de connexions
                 Console.WriteLine("MultiThreadedEchoServer started...");
+                abschannellist.Add(new Channel("[NITRO]GANG"));
+                abschannellist.Add(new Channel("ITF 2021"));
+                abschannellist.Add(new Channel("F RAIE CHAR O"));
+
                 while (true)
                 {
                     Console.WriteLine("Waiting for incoming client connections...");
@@ -92,6 +97,38 @@ namespace ServerSide
                             Console.WriteLine(channelwanted);
                             string content = receive(client);   //message
                             sendchannel(content, new Channel(channelwanted));   //envoi
+                            foreach (Client c in listeclients)
+                            {
+                                foreach (Channel mychannel in c.meschannels)
+                                {
+                                    if (Equals(channelwanted.Trim(), mychannel._name))
+                                    {
+                                        DateTime timestamp = DateTime.Now;
+                                        mychannel._textchannel += Environment.NewLine + timestamp.ToLongTimeString() + "\t" + content;
+                                    }
+                                }
+                            }
+                            break;
+
+
+                        case "get_text":       // envoie l'historique au client qui le demande (en cas de changement de channel)
+
+                            string chan = receive(client);
+                            bool flag = false;
+                            foreach (Client c in listeclients)
+                            {
+                                foreach (Channel oui in c.meschannels)
+                                {
+                                    if (oui._name == chan & flag == false)
+                                    {
+                                        Console.WriteLine(chan);
+                                        sendmessage(oui._name, client);
+                                        sendmessage(oui._textchannel, client);
+                                        flag = true;
+                                    }
+                                }
+                            }
+
 
                             break;
 

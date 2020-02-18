@@ -88,6 +88,7 @@
             this.Controls.Add(this.send);
             this.Controls.Add(this.messagesent);
             this.Name = "window";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "window";
             this.ResumeLayout(false);
             this.PerformLayout();
