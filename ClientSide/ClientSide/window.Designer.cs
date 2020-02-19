@@ -39,7 +39,7 @@
             // 
             // messagesent
             // 
-            this.messagesent.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.messagesent.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.messagesent.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.messagesent.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.messagesent.Location = new System.Drawing.Point(12, 386);
@@ -50,7 +50,7 @@
             // 
             // conversation
             // 
-            this.conversation.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.conversation.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.conversation.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.conversation.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.conversation.Location = new System.Drawing.Point(12, 12);
@@ -69,7 +69,7 @@
             // 
             // ChannelList
             // 
-            this.ChannelList.BackColor = System.Drawing.SystemColors.Window;
+            this.ChannelList.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ChannelList.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ChannelList.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ChannelList.FormattingEnabled = true;
@@ -87,14 +87,14 @@
             this.pictureBox1.Image = global::ClientSide.Properties.Resources.Logo_Efrei_Paris_Cube_aplat_plein_noir;
             this.pictureBox1.Location = new System.Drawing.Point(671, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(117, 55);
+            this.pictureBox1.Size = new System.Drawing.Size(127, 55);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             // 
             // send
             // 
-            this.send.BackColor = System.Drawing.SystemColors.Window;
+            this.send.BackColor = System.Drawing.SystemColors.Control;
             this.send.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.send.ForeColor = System.Drawing.SystemColors.WindowText;
             this.send.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,10 +118,9 @@
             this.Controls.Add(this.conversation);
             this.Controls.Add(this.send);
             this.Controls.Add(this.messagesent);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "window";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "window";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

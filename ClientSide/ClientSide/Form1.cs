@@ -38,29 +38,7 @@ namespace ClientSide
         }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                    
         private void psbox_TextChanged(object sender, EventArgs e)
         {
             

@@ -37,14 +37,15 @@
             // 
             // Username
             // 
-            this.Username.Location = new System.Drawing.Point(165, 174);
+            this.Username.Location = new System.Drawing.Point(12, 55);
             this.Username.Name = "Username";
             this.Username.Size = new System.Drawing.Size(100, 20);
             this.Username.TabIndex = 0;
+            this.Username.TextChanged += new System.EventHandler(this.Username_TextChanged);
             // 
             // Password
             // 
-            this.Password.Location = new System.Drawing.Point(430, 174);
+            this.Password.Location = new System.Drawing.Point(118, 55);
             this.Password.Name = "Password";
             this.Password.Size = new System.Drawing.Size(100, 20);
             this.Password.TabIndex = 1;
@@ -53,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(162, 158);
+            this.label1.Location = new System.Drawing.Point(9, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 2;
@@ -62,7 +63,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(427, 158);
+            this.label2.Location = new System.Drawing.Point(115, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 3;
@@ -70,7 +71,7 @@
             // 
             // Createbut
             // 
-            this.Createbut.Location = new System.Drawing.Point(286, 208);
+            this.Createbut.Location = new System.Drawing.Point(59, 81);
             this.Createbut.Name = "Createbut";
             this.Createbut.Size = new System.Drawing.Size(109, 23);
             this.Createbut.TabIndex = 4;
@@ -82,13 +83,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(243, 161);
             this.Controls.Add(this.Createbut);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Password);
             this.Controls.Add(this.Username);
             this.Name = "Signup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Signup";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -33,5 +33,10 @@ namespace ClientSide
             cl.Serialize(cl);
             this.Dispose();
         }
+
+        private void Username_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

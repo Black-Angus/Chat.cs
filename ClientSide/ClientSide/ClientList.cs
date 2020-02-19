@@ -55,27 +55,22 @@ namespace ClientSide
         public Client Check(string username, string password, Label label)
         {
             Client zero = null;
-            foreach(Client client in listeclients)
+            foreach (Client client in listeclients)
             {
-                if (client.name == username)
+                if (client.password == password & client.name == username)
                 {
-                    if (client.password == password)
-                    {
-                        label.Text = "Authentificated Successfuly";
-                        zero = client;
-                        break;
-                    }
-                    else
-                    {
-                        label.Text = "Password Wrong";
-                    }
-                    
+                    label.Text = "Authentificated Successfuly";
+                    zero = client;
+                    break;
                 }
+                
                 else
                 {
-                    label.Text = "Username not found";
+                    label.Text = "Authentification Failed";
                 }
+
             }
+            
             return zero;
         }
 
